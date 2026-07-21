@@ -14,6 +14,6 @@ This issue has a clearly defined documentation deliverable and is limited primar
 
 **Branch name:** docs/36-explain-hybrid-retrieval-scoring
 
-**Setup confirmation:** [ ] App runs locally at localhost:5173
+**Setup confirmation:** [yes] App runs locally at localhost:5173
 
-**Cohort ledger:** [ ] Issue added to cohort ledger
+**Cohort ledger:** [ yes] Issue added to cohort ledger
