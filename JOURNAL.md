@@ -17,3 +17,6 @@ This issue has a clearly defined documentation deliverable and is limited primar
 **Setup confirmation:** [yes] App runs locally at localhost:5173
 
 **Cohort ledger:** [ yes] Issue added to cohort ledger
+## Week 8 — Reproduction notes
+
+I reproduced the documentation gap by comparing `docs/ARCHITECTURE.md` with the implementation in `rag/retriever/hybrid.py`. The architecture document states that vector and keyword search results are blended, but it does not document the normalization formulas, weighted scoring formula, default weights of 0.7 and 0.3, or the minimum-score filtering behavior implemented by `HybridRetriever`.
