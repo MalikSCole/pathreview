@@ -17,6 +17,20 @@ This issue has a clearly defined documentation deliverable and is limited primar
 **Setup confirmation:** [yes] App runs locally at localhost:5173
 
 **Cohort ledger:** [ yes] Issue added to cohort ledger
+
 ## Week 8 — Reproduction notes
 
 I reproduced the documentation gap by comparing `docs/ARCHITECTURE.md` with the implementation in `rag/retriever/hybrid.py`. The architecture document states that vector and keyword search results are blended, but it does not document the normalization formulas, weighted scoring formula, default weights of 0.7 and 0.3, or the minimum-score filtering behavior implemented by `HybridRetriever`.
+
+## Week 8 — Reproduction & solution planning
+
+**Reproduction commit link:** [Paste the GitHub link to your reproduction commit]
+
+**Reproduction summary:**
+I reproduced the issue by comparing the hybrid retrieval explanation in `docs/ARCHITECTURE.md` with the implementation in `rag/retriever/hybrid.py`, `vector_store.py`, and `keyword_search.py`. The code defines score conversion, normalization, default weights, weighted blending, filtering, and sorting behavior that the architecture document does not currently explain.
+
+**PLAN.md link:** https://github.com/MalikSCole/pathreview/blob/docs/36-explain-hybrid-retrieval-scoring/PLAN.md
+
+
+**Blockers or open questions:**
+I need to ensure that the wording around ChromaDB distance is accurate because the collection uses cosine distance while an implementation comment refers generally to Euclidean distance. I also want to confirm whether the documentation should mention that custom weights are not currently validated to sum to one.
