@@ -49,7 +49,7 @@ None currently.
 
 ### Check-in 2 (end of week)
 
-PR link: 
+PR link: https://github.com/ascherj/pathreview/pull/772
 
 Branch: docs/36-explain-hybrid-retrieval-scoring
 
