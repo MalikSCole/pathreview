@@ -34,3 +34,12 @@ I reproduced the issue by comparing the hybrid retrieval explanation in `docs/AR
 
 **Blockers or open questions:**
 I need to ensure that the wording around ChromaDB distance is accurate because the collection uses cosine distance while an implementation comment refers generally to Euclidean distance. I also want to confirm whether the documentation should mention that custom weights are not currently validated to sum to one.
+
+## Week 9 — Documentation update and validation
+
+Updated `docs/ARCHITECTURE.md` to explain hybrid retrieval scoring for Issue #36. The new section documents vector distance conversion, per-retriever score normalization, default vector and keyword weights, missing-score handling, minimum-score filtering, max returned chunks, and a worked example.
+
+No tests were added because this PR changes documentation only and does not modify runtime behavior. I ran the existing validation and unit test commands:
+
+- `make check` failed in Ruff lint with 182 existing issues across application and test files, including import ordering, unused imports/variables, line length, FastAPI `Depends`/`File` default warnings, duplicate dictionary key `"Git"` in `agent/tools/skill_extractor.py`, and an undefined `skill_names` reference in `tests/unit/test_skill_extractor.py`.
+- `make test-unit` failed with 52 failed tests, 345 passed tests, 31 errors, and 1 warning. Failures/errors were spread across existing unit areas including batch processing, bias detection, faithfulness scoring, keyword search empty-index handling, output parsing, PII scrubbing, prompt defense, README/resume parsing, review service async mocks, security hash handling, skill extraction, tech detection, semantic chunking, and structural chunking.
