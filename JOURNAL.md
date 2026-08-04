@@ -34,6 +34,36 @@ I reproduced the issue by comparing the hybrid retrieval explanation in `docs/AR
 
 **Blockers or open questions:**
 I need to ensure that the wording around ChromaDB distance is accurate because the collection uses cosine distance while an implementation comment refers generally to Euclidean distance. I also want to confirm whether the documentation should mention that custom weights are not currently validated to sum to one.
+## Week 9 — Solution building & PR submission
+
+### Check-in 1 (mid-week)
+
+**Current progress:**
+I reviewed the hybrid retrieval implementation and added a draft scoring section to `docs/ARCHITECTURE.md`. The section now explains vector-score conversion, per-retriever normalization, the weighted scoring formula, the default 0.7 vector and 0.3 keyword weights, and a worked numerical example.
+
+**Next steps:**
+I will compare the documentation against `rag/retriever/hybrid.py`, `vector_store.py`, and `keyword_search.py` one more time, run `make check` and `make test-unit`, open a draft pull request, and request peer or mentor feedback.
+
+**Blockers:**
+None currently.
+
+### Check-in 2 (end of week)
+
+PR link: 
+
+Branch: docs/36-explain-hybrid-retrieval-scoring
+
+What you built:
+I expanded docs/ARCHITECTURE.md with an explanation of PathReview’s hybrid retrieval scoring process. The documentation now covers vector-score conversion, score normalization, the weighted formula, default weights, missing retriever scores, score filtering, result ordering, and a worked example.
+
+Tests added or updated:
+No test files were added or updated because this was a documentation-only change and did not modify executable behavior. I ran the project’s existing checks and unit tests and recorded the current failures below.
+
+Self-review confirmation: [ ] make check passes [ ] make test-unit passes
+
+Validation note: `make check` and `make test-unit` were run, but both commands failed due to existing lint and unit test failures unrelated to this documentation-only change.
+
+Draft PR feedback received from: [“none”]
 
 ## Week 9 — Documentation update and validation
 
