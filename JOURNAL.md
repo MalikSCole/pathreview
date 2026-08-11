@@ -81,9 +81,10 @@ No tests were added because this PR changes documentation only and does not modi
 **Feedback received:** [ ] Yes  [x] No — still awaiting review
 
 **Summary of feedback:**
-No reviewer or maintainer feedback was provided during the Summer 2026 contribution period.
+No reviewer or maintainer feedback arrived during the Summer 2026 contribution period. I still reviewed my own pull request against the issue requirements and compared the documentation change with the implementation before finalizing it.
 
 **How you responded:**
+No response was needed because no reviewer feedback was received.
 
 ---
 
@@ -91,21 +92,20 @@ No reviewer or maintainer feedback was provided during the Summer 2026 contribut
 
 **What was harder than you expected?**
 
-The hardest part was making sure the documentation accurately described the implementation instead of relying only on the wording of the GitHub issue. The issue sounded simple because it only required updating `docs/ARCHITECTURE.md`, but I still needed to trace the retrieval flow through `rag/retriever/hybrid.py`, `vector_store.py`, and `keyword_search.py` to understand exactly how the scores were generated, normalized, weighted, filtered, and ranked. I also had to be careful about details such as the vector store using cosine distance while one code comment referred to Euclidean distance, because repeating an inaccurate comment in the documentation would have made the change worse rather than better.
+The hardest part was making sure my documentation accurately reflected the implementation instead of only repeating what Issue #36 said. I had to trace the hybrid retrieval logic through `rag/retriever/hybrid.py`, `rag/retriever/vector_store.py`, and `rag/retriever/keyword_search.py` to understand how vector scores and BM25 scores were normalized and combined. I also noticed that the vector store is configured for cosine distance while a code comment refers to Euclidean distance, so I had to be careful not to repeat potentially misleading wording in `docs/ARCHITECTURE.md`.
 
 **What did you learn about working in a large codebase?**
 
-I learned that even a small documentation issue can require understanding several connected parts of a codebase. In my own projects, I usually already understand why a design decision was made and where the relevant logic lives. In an unfamiliar repository, I had to trace imports, follow the data through multiple modules, compare the documentation with the actual implementation, and avoid changing behavior that was outside the scope of my issue. I also learned the importance of keeping a contribution narrowly scoped so that the pull request is easier to review and less likely to introduce unrelated changes.
+I learned that even a small documentation change can depend on several different parts of a large codebase. For Issue #36, the file I actually changed was `docs/ARCHITECTURE.md`, but I had to understand retrieval logic from multiple files before I could document it correctly. This was different from working on my own projects because I had to respect the existing structure, stay within the issue scope, and treat the codebase itself as the source of truth.
 
 **How did AI tools help — and where did they fall short?**
 
-AI tools were most useful for helping me navigate unfamiliar files, explain the hybrid retrieval logic, and turn the implementation into a structured solution plan. They also helped me identify questions worth investigating, such as how missing retriever scores are handled and how normalization works. However, I still needed to verify the answers directly against the repository. AI could suggest what the scoring formula was likely to mean, but the source code was the final authority for the actual default weights, score normalization, filtering threshold, and result limits. This reinforced that AI is useful for accelerating codebase exploration, but it should not replace reading and validating the implementation.
+AI tools helped me understand unfamiliar code more quickly and helped me identify the important parts of the scoring process, including the `0.7` vector weight, `0.3` keyword weight, score normalization, filtering threshold, and missing-score behavior. They were also useful for helping me organize my `PLAN.md` and think through edge cases before making the documentation change. However, I still had to verify every technical detail directly in the repository because AI could explain the logic, but it could not replace checking the exact implementation or deciding whether something was actually within the scope of Issue #36.
 
 **What would you do differently if you started over?**
 
-I would inspect the implementation files earlier in the issue-selection process instead of focusing primarily on the issue description. Doing that immediately would have helped me understand the exact scope and edge cases before writing my initial journal entry and solution plan. I would also document useful implementation details as I discovered them so that writing `PLAN.md`, the architecture update, and the pull request description would require less backtracking later.
+If I started over, I would inspect the relevant implementation files immediately after choosing the issue instead of waiting until the planning stage. Reading `hybrid.py`, `vector_store.py`, and `keyword_search.py` earlier would have made my Week 7 problem summary and Week 8 plan more precise from the beginning. I would also keep short notes while exploring the code so I would not need to revisit the same implementation details when writing `PLAN.md`, the PR description, and the final documentation.
 
 **What are you most proud of from this module?**
 
-I am most proud of completing the full open-source contribution workflow rather than only making the documentation change itself. I selected and claimed an issue, set up an unfamiliar repository locally, created and maintained a dedicated branch, investigated the implementation, documented my reproduction and plan, made the change, ran the project checks, and submitted a pull request to the upstream repository. Going through that complete process gave me experience with how a contribution moves from an issue to a reviewable pull request in someone else's codebase.
-
+I am most proud of completing the entire contribution workflow from issue selection through pull request submission. I claimed Issue #36, created a dedicated branch, set up the repository locally, documented the issue in `JOURNAL.md`, created `PLAN.md`, traced the implementation, updated `docs/ARCHITECTURE.md`, ran the required checks, and opened a pull request to the upstream PathReview repository. The documentation change itself was small, but completing the full workflow gave me experience contributing to a codebase I did not originally build.
