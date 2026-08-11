@@ -73,3 +73,39 @@ No tests were added because this PR changes documentation only and does not modi
 
 - `make check` failed in Ruff lint with 182 existing issues across application and test files, including import ordering, unused imports/variables, line length, FastAPI `Depends`/`File` default warnings, duplicate dictionary key `"Git"` in `agent/tools/skill_extractor.py`, and an undefined `skill_names` reference in `tests/unit/test_skill_extractor.py`.
 - `make test-unit` failed with 52 failed tests, 345 passed tests, 31 errors, and 1 warning. Failures/errors were spread across existing unit areas including batch processing, bias detection, faithfulness scoring, keyword search empty-index handling, output parsing, PII scrubbing, prompt defense, README/resume parsing, review service async mocks, security hash handling, skill extraction, tech detection, semantic chunking, and structural chunking.
+
+## Week 10 — Iteration & reflection
+
+### Reviewer feedback
+
+**Feedback received:** [ ] Yes  [x] No — still awaiting review
+
+**Summary of feedback:**
+No reviewer or maintainer feedback was provided during the Summer 2026 contribution period.
+
+**How you responded:**
+
+---
+
+### Reflection
+
+**What was harder than you expected?**
+
+The hardest part was making sure the documentation accurately described the implementation instead of relying only on the wording of the GitHub issue. The issue sounded simple because it only required updating `docs/ARCHITECTURE.md`, but I still needed to trace the retrieval flow through `rag/retriever/hybrid.py`, `vector_store.py`, and `keyword_search.py` to understand exactly how the scores were generated, normalized, weighted, filtered, and ranked. I also had to be careful about details such as the vector store using cosine distance while one code comment referred to Euclidean distance, because repeating an inaccurate comment in the documentation would have made the change worse rather than better.
+
+**What did you learn about working in a large codebase?**
+
+I learned that even a small documentation issue can require understanding several connected parts of a codebase. In my own projects, I usually already understand why a design decision was made and where the relevant logic lives. In an unfamiliar repository, I had to trace imports, follow the data through multiple modules, compare the documentation with the actual implementation, and avoid changing behavior that was outside the scope of my issue. I also learned the importance of keeping a contribution narrowly scoped so that the pull request is easier to review and less likely to introduce unrelated changes.
+
+**How did AI tools help — and where did they fall short?**
+
+AI tools were most useful for helping me navigate unfamiliar files, explain the hybrid retrieval logic, and turn the implementation into a structured solution plan. They also helped me identify questions worth investigating, such as how missing retriever scores are handled and how normalization works. However, I still needed to verify the answers directly against the repository. AI could suggest what the scoring formula was likely to mean, but the source code was the final authority for the actual default weights, score normalization, filtering threshold, and result limits. This reinforced that AI is useful for accelerating codebase exploration, but it should not replace reading and validating the implementation.
+
+**What would you do differently if you started over?**
+
+I would inspect the implementation files earlier in the issue-selection process instead of focusing primarily on the issue description. Doing that immediately would have helped me understand the exact scope and edge cases before writing my initial journal entry and solution plan. I would also document useful implementation details as I discovered them so that writing `PLAN.md`, the architecture update, and the pull request description would require less backtracking later.
+
+**What are you most proud of from this module?**
+
+I am most proud of completing the full open-source contribution workflow rather than only making the documentation change itself. I selected and claimed an issue, set up an unfamiliar repository locally, created and maintained a dedicated branch, investigated the implementation, documented my reproduction and plan, made the change, ran the project checks, and submitted a pull request to the upstream repository. Going through that complete process gave me experience with how a contribution moves from an issue to a reviewable pull request in someone else's codebase.
+
